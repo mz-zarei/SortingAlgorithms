@@ -3,13 +3,17 @@
 # Created By  : Mohammad Zarei
 # Created Date: 9 Aug 2022
 # ---------------------------------------------------------------------------
-"""comparing the time peformance of sorting algorithms
+"""
+comparing the time peformance of sorting algorithms
 """
 
 #imports
 from random import randint
 from timeit import repeat
 from sort import *
+import numpy as np
+import pandas as pd
+import seaborn as sns 
 
 
 def run_sorting_algorithm(algorithm, array):
@@ -23,22 +27,26 @@ def run_sorting_algorithm(algorithm, array):
 
     # Execute the code ten different times and return the time
     # in seconds that each execution took
-    times = repeat(setup=setup_code, stmt=stmt, repeat=3, number=10)
+    times = repeat(setup=setup_code, stmt=stmt, repeat=3, number=5)
 
     # Finally, display the name of the algorithm and the
     # minimum time it took to run
-    print(f"Algorithm: {algorithm}. Minimum execution time: {min(times)}")
+
+    # print(f"Algorithm: {algorithm}. Mean execution time: {np.min(times)}")
+    return np.min(times)
 
 
-ARRAY_LENGTH = 1000
-ALGORITHMS = ['sorted', 'bubble', 'insertion']
+ALGORITHMS = ['sorted', 'insertion', 'merge', 'quick', 'bucket']
 
 if __name__ == "__main__":
-    # Generate an array of `ARRAY_LENGTH` items consisting
-    # of random integer values between 0 and 999
-    array = [randint(0, 1000) for i in range(ARRAY_LENGTH)]
-
-    # Call the function using the name of the sorting algorithm
-    # and the array you just created
+    times = []
     for alg in ALGORITHMS:
-        run_sorting_algorithm(algorithm=alg, array=array)
+        for size in [100,1000,10000,100000]:
+            array = [randint(0,size) for i in range(size)]
+            meanTime = run_sorting_algorithm(algorithm=alg, array=array)
+            times.append([alg, size, meanTime])
+    
+    times = pd.DataFrame(times, columns=['ALG', 'SIZE', 'TIME'])
+    times.to_csv('times.csv')
+    fig = sns.lineplot(data=times, x="SIZE", y="TIME", hue="ALG", markers=True).get_figure()
+    fig.savefig('plot.png')
