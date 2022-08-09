@@ -32,7 +32,7 @@ buckets, and then distribute the n input numbers into the buckets. Since the inp
 - Space complexity = O(nk)
 
 ## Performance comparison
-<img src="https://github.com/mz-zarei/SortingAlgorithms/plot.png" alt="comparison" width="500"/>
+<img src="https://github.com/mz-zarei/SortingAlgorithms/blob/master/plot.png" alt="comparison" width="500"/>
 
 
 
