@@ -36,12 +36,13 @@ def run_sorting_algorithm(algorithm, array):
     return np.min(times)
 
 
-ALGORITHMS = ['sorted', 'insertion', 'merge', 'quick', 'bucket']
+ALGORITHMS = ['sorted', 'insertion', 'merge', 'quick', 'bucket', 'counting', 'radix']
 
 if __name__ == "__main__":
     times = []
     for alg in ALGORITHMS:
         for size in [100,1000,10000,100000]:
+            print(f"Alg: {alg}, Array size: {size}")
             array = [randint(0,size) for i in range(size)]
             meanTime = run_sorting_algorithm(algorithm=alg, array=array)
             times.append([alg, size, meanTime])

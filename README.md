@@ -27,9 +27,21 @@ Quicksort first selects a pivot element and partitions the list around the pivot
 ## Bucket Sort
 As described in "Introduction to Algorithms" (CLRS book) Bucket sort runs in O(n) when input is drawn from a uniform distribution. The idea of bucket sort is to divide the interval [0, 1) into n equal-sized
 buckets, and then distribute the n input numbers into the buckets. Since the inputs are uniformly distributed over [0, 1), we don't expect many numbers to fall into each bucket. We then simply sort the numbers in each bucket and  go through the buckets in order, listing the elements in each.
-
 - Time complexity - AVG = O(n)
 - Space complexity = O(nk)
+
+## Counting Sort
+Counting sort is a sorting algorithm that sorts the elements of an array by counting the number of occurrences of each unique element in the array. The count is stored in an auxiliary array and the sorting is done by mapping the count as an index of the auxiliary array.
+
+- Time complexity = O(n * MAX)
+- Space complexity = O(MAX)
+
+## Radix Sort
+Radix sort is an integer sorting algorithm that sorts data with integer keys by grouping the keys by individual digits that share the same significant position and value (place value). Radix sort uses counting sort as a subroutine to sort an array of numbers.
+
+- Time complexity = O(n * max_digit_num) 
+- Space complexity = O(n + max_digit_num)
+
 
 ## Performance comparison
 <img src="https://github.com/mz-zarei/SortingAlgorithms/blob/master/plot.png" alt="comparison" width="500"/>

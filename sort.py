@@ -11,6 +11,8 @@
     Heap sort
 """
 # ---------------------------------------------------------------------------
+from cmath import inf
+from itertools import count
 from random import randint
 
 def bubble(array):
@@ -110,6 +112,74 @@ def bucket(array, num_buckets = 10):
     return result
 
 
+def counting(array, upper=None, lower=0):
+    """
+    Counting sort
+        time: O(n * MAX) 
+        space: O(MAX)
+    """
+
+    if len(array) <= 1:
+        return array
+
+    if not upper:
+        upper = float(-inf)
+        lower = float(inf)
+        for num in array:
+            if num < lower:
+                lower = num
+            if num > upper:
+                upper = num
+    counts = [0]*(upper - lower + 1)
+    for num in array:
+        counts[num-lower] += 1
+
+    for i in range(1, len(counts)):
+        counts[i] += counts[i-1]
+    
+    ordered = array[:]
+    
+    for i in range(len(array) - 1, -1, -1):
+        num = array[i]
+        ordered[counts[num-lower] - 1] = num
+        counts[num-lower] -= 1
+
+    return ordered
+
+
+def radix(array):
+    """
+    Radix sort
+        time: O(n * k), k: length of longest number
+        space: O(n + k)
+    """
+    MAX = max(array)
+    div = 1
+
+    while MAX/div > 1:
+        
+        counts = [0] * 10
+        for num in array:
+            digit = (num // div) % 10
+            counts[digit] += 1
+        for i in range(1, 10):
+            counts[i] += counts[i - 1]
+        res = array[:]
+        for i in range(len(array) - 1, -1, -1):
+            num =array[i]
+            digit = (num // div) % 10
+            res[counts[digit] - 1] = num
+            counts[digit] -= 1
+        div *= 10
+        array = res[:]
+
+    return res
+
+
+
+
+
+
 
 
 
@@ -142,8 +212,8 @@ def _merge(left, right):
 
 
 # from random import randint
-# array = [randint(0, 100) for i in range(100)]
-# array = quick_sort(array)
+# array = [randint(0, 100) for i in range(10)]
+# array = radix(array)
 # print(array)
 
 
