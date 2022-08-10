@@ -14,6 +14,7 @@
 from cmath import inf
 from itertools import count
 from random import randint
+from wsgiref.util import request_uri
 
 def bubble(array):
     """
@@ -33,6 +34,21 @@ def bubble(array):
         if array_sorted:
             break
     
+    return array
+
+def selection(array):
+    """
+    Selection sort
+        time: O(n^2) 
+        space: O(1)
+    """
+    N = len(array)
+    for i in range(N):
+        min_index = i
+        for j in range(i+1, N):
+            if array[j] < array[min_index]:
+                min_index = j
+        array[i], array[min_index] = array[min_index], array[i]
     return array
 
 
@@ -213,7 +229,7 @@ def _merge(left, right):
 
 # from random import randint
 # array = [randint(0, 100) for i in range(10)]
-# array = radix(array)
+# array = selection(array)
 # print(array)
 
 

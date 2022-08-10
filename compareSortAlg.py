@@ -36,7 +36,7 @@ def run_sorting_algorithm(algorithm, array):
     return np.min(times)
 
 
-ALGORITHMS = ['sorted', 'insertion', 'merge', 'quick', 'bucket', 'counting', 'radix']
+ALGORITHMS = ['insertion', 'merge', 'quick', 'bucket', 'counting', 'radix', 'sorted']
 
 if __name__ == "__main__":
     times = []
